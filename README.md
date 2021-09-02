@@ -2,7 +2,7 @@
 
 ## What is it?
 
-Silver Parakeet is an educational program showing how Puppeteer could be used to automatically submit random fake reports to a website.
+Silver Parakeet is an educational program showing how Puppeteer could be used to automatically submit randomized report data to a website.
 
 ## How Do I Use It?
 DISCLAIMER: THIS IS FOR EDUCATIONAL PURPOSES ONLY. DO NOT USE THIS OR ANY OTHER SOFTWARE TO SPAM A SITE.
