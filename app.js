@@ -1,6 +1,14 @@
 const Axios = require("axios");
-const puppeteer = require("puppeteer");
+const puppeteer = require("puppeteer-extra");
+const RecaptchaPlugin = require("puppeteer-extra-plugin-recaptcha");
 const counties = require("./addresses.json");
+
+puppeteer.use(
+  RecaptchaPlugin({
+    provider: { id: "2captcha", token: process.env.TWO_CAPTCHA_API_KEY }, // $3 per 1000 reCAPTCHAs - https://2captcha.com/?from=6690177
+    visualFeedback: true,
+  })
+);
 
 const formFields = {
   HOW_LAW_VIOLATED: {
@@ -45,7 +53,6 @@ const setName = async () => {
 
 const fillField = async (page, fieldName) => {
   const field = formFields[fieldName];
-  console.log(field.selector);
   if (fieldName === "NOT_A_POLITICIAN") {
     await page.$eval(field.selector, (el) => {
       el.click();
@@ -63,20 +70,31 @@ const fillField = async (page, fieldName) => {
 
 const fillForm = async (page) => {
   await page.goto("https://prolifewhistleblower.com/anonymous-form/");
-  await page.waitForSelector(formFields.HOW_LAW_VIOLATED.selector);
+  await page.waitForSelector(formFields.HOW_LAW_VIOLATED.selector, {
+    timeout: 0,
+  });
   for (let fieldName in formFields) {
     await fillField(page, fieldName);
   }
+  await page.solveRecaptchas();
+  await page.$eval(".forminator-button-submit", (el) => el.click());
+  await page.waitFor(3000);
   await page.screenshot({ path: "./screenshot.png", fullPage: true });
 };
 
 (async () => {
   try {
-    const browser = await puppeteer.launch();
+    const browser = await puppeteer.launch({
+      headless: true,
+      args: ["--proxy-server=socks5://127.0.0.1:9050"],
+    });
     const page = await browser.newPage();
     setAddress();
     await setName();
     await fillForm(page);
+    await page.waitFor(5000);
+    await page.screenshot({ path: "./screenshot.png", fullPage: true });
+
     await browser.close();
   } catch (error) {
     console.log({ error });
