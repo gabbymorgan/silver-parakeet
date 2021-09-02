@@ -1,0 +1,24 @@
+{
+  "name": "autoreporter",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "Gabby Pelton <gabriellapelton@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "axios": "^0.21.1",
+    "cors": "^2.8.5",
+    "helmet": "^4.6.0",
+    "morgan": "^1.10.0",
+    "nodemon": "^2.0.12",
+    "puppeteer": "^10.2.0",
+    "request": "^2.88.2",
+    "request-promise-native": "^1.0.9"
+  },
+  "scripts": {
+    "start": "node app.js",
+    "develop": "nodemon --require dotenv/config app.js"
+  },
+  "devDependencies": {
+    "dotenv": "^10.0.0"
+  }
+}
