@@ -5,7 +5,7 @@
 Silver Parakeet is an educational program showing how Puppeteer could be used to automatically submit random fake reports to the website: https://prolifewhistleblower.com/anonymous-form/. This website is used for reporting women trying to exercise their right to bodily autonomy in the state of Texas, an act that became illegal yesterday, September 1, 2021.
 
 ## How Do I Use It?
-
+DISCLAIMER: THIS IS FOR EDUCATIONAL PURPOSES ONLY. DO NOT USE THIS OR ANY OTHER SOFTWARE TO SPAM A SITE.
 Hypothetically, if you were to use it, the steps would go like this:
 
 1. Install [Node/npm](https://docs.microsoft.com/en-us/windows/dev-environment/javascript/nodejs-beginners-tutorial)
